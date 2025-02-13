@@ -1,15 +1,17 @@
-# Use an official Python image as the base image
-FROM python:3.8
+# Use a lightweight Python image
+FROM python:3.8-slim
 
-# Set the working directory in the container
+# Set working directory
 WORKDIR /app
 
-# Copy the application files into the container
-COPY loan_app.py .
-COPY loan_disbursement.py .
+# Copy application files
+COPY . .
 
-# Install any required dependencies (if any, add a requirements.txt file)
-RUN pip install -r requirements.txt
+# Install dependencies (if any)
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Command to run the app
+# Expose the application port
+EXPOSE 5000
+
+# Run the application
 CMD ["python", "loan_app.py"]
